@@ -1,24 +1,39 @@
-import logo from './logo.svg';
 import './App.css';
+import Footer from './Routing/Footer';
+import Header from './Routing/Header';
+import {BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom"
+import Homepage from './Routing/Homepage';
+import Aboutpage from './Routing/Aboutppage';
+import Contactpage from './Routing/Contactspage';
+import Pagenotfound from './Routing/Pagenotfound';
+import Productslist from './Routing/Productslist'
+import Mobilelist from './Routing/Mobilelist';
+import Laptoplist from './Routing/Laptoplist';
+import Infomobile from './Routing/Infomobile'
+import Otherpage from "./Routing/Otherpage"
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header/>
+      <Routes>
+        <Route path='/' element = {<Navigate to = "./contact"/>} />
+        <Route path='home' element={<Homepage/>}/>
+        <Route path='about' element={<Aboutpage/>}/>
+        <Route path='contact' element={<Contactpage/>}/>
+        <Route path='/*' element={<Pagenotfound/>}/>
+        <Route path='/products' element={<Productslist/>}>
+          <Route  path='mobile' element={<Mobilelist/>}>
+            <Route path=':des' element= {<Infomobile/>}/>
+          </Route>
+          <Route path='laptop' element={<Laptoplist/>}/>
+        </Route>
+        <Route path='otherpage' element={<Otherpage/>}/>
+
+
+      </Routes>
+      <Footer/>
+    </Router>
   );
 }
 
